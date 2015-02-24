@@ -25,7 +25,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 #spotify stuff
 gem 'spotify', '~> 12.5.3'
-
+gem 'rspotify'
 #devise auth stuff
 gem 'devise'
 
