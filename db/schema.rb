@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 20150225205952) do
     t.datetime "updated_at", null: false
   end
 
-  add_index "songs", ["spotify_id"], name: "index_songs_on_spotify_id", unique: true
+  add_index "songs", ["spotify_id"], name: "index_songs_on_spotify_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
