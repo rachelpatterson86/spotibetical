@@ -4,7 +4,7 @@ class CreateSongs < ActiveRecord::Migration
       t.integer :user_id
       t.string :artist
       t.string :title
-      t.string :spotify_id, :unique => true
+      t.string :spotify_id, :index =>true, :unique => true
       t.timestamps null: false
     end
   end
