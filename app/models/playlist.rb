@@ -1,3 +1,3 @@
 class Playlist < ActiveRecord::Base
-  has_many :songs, through :suggestions
+  has_many :songs
 end
