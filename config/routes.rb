@@ -1,7 +1,14 @@
 Rails.application.routes.draw do
   devise_for :users
-  root to: "users#index"
-    # The priority is based upon order of creation: first created -> highest priority.
+  get '/user' => "users#search"
+  root "users#search"
+  # post '/songs' => 'songs#submit'
+  # put '/playlists' => 'playlists#vote'
+  # get '/playlists' => 'playlists#list'
+  # get '/playlists' => 'playlists#play'
+
+
+  # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
