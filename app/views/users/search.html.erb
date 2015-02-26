@@ -7,7 +7,34 @@
 </header>
 
 <div class=content-wrapper>
+  <h3>Songs from your search!</h3>
   <div class=song-query>
+    <thead>
+      <tr>
+        <th>Song</th>
+        <th>Artist</th>
+        <th>Album</th>
+        <th></th>
+      </tr>
+      <% if @query %>
+    <% @query.each do |l| %>
+    <tr>
+      <td><%= l.name %></td>
+      <td><%= l.artists.first.name %></td>
+      <td><%= l.album.name %></td>
+    </tr>
+<!--    <% if @query %>
+
+      <% @query.each_index do |q| %>
+
+        <p>
+          <%= @query[q].name %>
+        </p>
+      <% end %>
+    <% end %> -->
+    <% end %>
+    <% end %>
+    </thead>
 
   </div>
 
