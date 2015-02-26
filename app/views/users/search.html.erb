@@ -1,0 +1,14 @@
+<header>
+  <%= form_tag("user", method: "get", remote: true) do %>
+  <%= label_tag(:q, "Search for Title:") %>
+  <%= text_field_tag(:q, params[:q]) %>
+  <%= submit_tag("Search") %>
+  <% end %>
+</header>
+
+<div class=content-wrapper>
+  <div class=song-query>
+
+  </div>
+
+</div>
