@@ -1,10 +1,12 @@
 class SongsController < ApplicationController
 
-  # def submit
-  #   Song.create(user_id: current_user.id,
-  #               artist: blah.artists[0].name,
-  #               title: blah.name,
-  #               spotify_id: blah.id)
-  # end
+  def submit
+    Song.create(song_params)
+  end
+
+private
+    def song_params
+      params.require(:songs).permit(:user_id, :artist, :title, :spotify_id)
+    end
 
 end

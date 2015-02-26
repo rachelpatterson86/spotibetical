@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   devise_for :users
   get '/user' => "users#search"
   root "users#search"
-  # post '/songs' => 'songs#submit'
+  post '/songs' => 'songs#submit'
   # put '/playlists' => 'playlists#vote'
   # get '/playlists' => 'playlists#list'
   # get '/playlists' => 'playlists#play'
