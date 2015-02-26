@@ -1,7 +1,6 @@
 <header>
-  <%= form_tag("user", method: "get", remote: true) do %>
-  <%= label_tag(:q, "Search for Title:") %>
-  <%= text_field_tag(:q, params[:q]) %>
+  <%= form_tag("user", method: "get") do %> <!--add: , remote: true for hard mode -->
+  <%= text_field_tag(:q, params[:q], placeholder: "Find Song Title") %>
   <%= submit_tag("Search") %>
   <% end %>
 </header>
@@ -9,33 +8,13 @@
 <div class=content-wrapper>
   <h3>Songs from your search!</h3>
   <div class=song-query>
-    <thead>
-      <tr>
-        <th>Song</th>
-        <th>Artist</th>
-        <th>Album</th>
-        <th></th>
-      </tr>
       <% if @query %>
-    <% @query.each do |l| %>
-    <tr>
-      <td><%= l.name %></td>
-      <td><%= l.artists.first.name %></td>
-      <td><%= l.album.name %></td>
-    </tr>
-<!--    <% if @query %>
-
-      <% @query.each_index do |q| %>
-
-        <p>
-          <%= @query[q].name %>
-        </p>
+      <ul id="search-results">
+        <% @query.each do |q| %>
+          <li><%= q.artists[0].name %> - <%= q.name %></li>
+        <% end %>
+      </ul>
       <% end %>
-    <% end %> -->
-    <% end %>
-    <% end %>
-    </thead>
-
   </div>
 
 </div>
