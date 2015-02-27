@@ -1,4 +1,4 @@
 class Song < ActiveRecord::Base
   has_many :votes
-  has_many :voters, :through => :votes, class_name: 'User'
+  has_many :users, :through => :votes
 end
