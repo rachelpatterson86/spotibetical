@@ -2,7 +2,9 @@ class SongsController < ApplicationController
 
   def submit
     @song = Song.create(song_params)
-    upvote = @song.users
+    @song.votes.create(:user_id => current_user.id,
+                       :user_vote => 1)
+    #@song.users = [current_user] better if there are no additional attributes
     render :show
   end
 
@@ -10,15 +12,16 @@ class SongsController < ApplicationController
     @songs = Song.all
   end
 
-  def vote
-    @song = Song.find(:id).voters
-    @song << current_user
-    @song.upvote
-    @song.downvote
+  def upvote
+    @song = Song.find(:id).vote
+    #@song.users << current_user
+    @song.votes.create(:user_id => current_user.id,
+    :user_vote => 1)
   end
 
-  def upvote
-    self
+  def downvote
+    @song.votes.create(:user_id => current_user.id,
+    :user_vote => -1)
   end
 
 private
@@ -42,8 +45,8 @@ end
 #     <% @songs.each do |s| %>
   #     <%= <td>s.artist</td> %>
   #     <%= <td>s.title</td> %>
-  #     <%= link_to("Up Vote",songs_show_path, method: :post) %>
-  #     <%= link_to("Down Vote",songs_delete_path, method: :destroy) %>
+  #     <%= link_to("Up Vote",songs__path, method: :post) %>
+  #     <%= link_to("Down Vote",songs_delete_path, method: :post) %>
 #     <% end %>
 #   </tr>
 # </table>
