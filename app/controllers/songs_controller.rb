@@ -2,6 +2,7 @@ class SongsController < ApplicationController
 
   def submit
     @song = Song.create(song_params)#:user_id, :artist, :title, :spotify_id)
+    upvote = @song.voters = [current_user]
     render :show
   end
 
@@ -9,13 +10,23 @@ class SongsController < ApplicationController
     @songs = Song.all
   end
 
+  def vote
+    @song = Song.find(:id).voters
+    @song << current_user
+    @song.upvote
+    @song.downvote
+  end
+
+  def upvote
+    self.
+  end
 private
     def song_params
       params.require(:song).permit(:user_id, :artist, :title, :spotify_id)
     end
 end
 
-# sudo erb 
+# sudo erb
 # <table>
 #   <tr>
 #     <td>Rank</td>
