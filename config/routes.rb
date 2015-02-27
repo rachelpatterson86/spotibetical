@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   get '/user' => "users#search"
   root "users#search"
   post '/songs' => 'songs#submit'
+  get '/songs' => 'songs#show'
   # put '/playlists' => 'playlists#vote'
   # get '/playlists' => 'playlists#list'
   # get '/playlists' => 'playlists#play'
