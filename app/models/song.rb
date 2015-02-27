@@ -1,4 +1,4 @@
 class Song < ActiveRecord::Base
-  belongs_to :user
-  belongs_to :playlist
+  has_many :votes
+  has_many :voters, :through => :votes, class_name: 'User'
 end

@@ -1,0 +1,12 @@
+<h1>Show suggested Songs</h1>
+
+<div class="list-content">
+  <% if @songs %>
+    <ul class="list">
+      <% @songs.each do |q| %>
+        <li><%= q.artist %> : <%= q.title %></li>
+      <% end %>
+    </ul>
+  <% end %>
+</div>
+
