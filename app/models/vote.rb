@@ -1,4 +1,11 @@
 class Vote < ActiveRecord::Base
-  has_many :songs
-  has_many :users
+  belongs_to :song
+  belongs_to :user
+
+validates_uniqueness_of :user_id, scope: :song_id
+
+  def upvote
+    
+  end
+
 end
