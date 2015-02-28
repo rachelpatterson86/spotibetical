@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150227183706) do
+ActiveRecord::Schema.define(version: 20150228204246) do
 
   create_table "playlists", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 20150227183706) do
     t.datetime "updated_at", null: false
   end
 
-  add_index "songs", ["spotify_id"], name: "index_songs_on_spotify_id"
+  add_index "songs", ["spotify_id"], name: "index_songs_on_spotify_id", unique: true
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -42,6 +42,9 @@ ActiveRecord::Schema.define(version: 20150227183706) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "access_token"
+    t.string   "refresh_token"
+    t.datetime "expires_at"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

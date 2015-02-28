@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   root "users#search"
   post '/songs' => 'songs#submit'
   get '/songs' => 'songs#show'
+  get '/playlists' => 'playlists#index', as: :playlists
   # put '/playlists' => 'playlists#vote'
   # get '/playlists' => 'playlists#list'
   # get '/playlists' => 'playlists#play'
