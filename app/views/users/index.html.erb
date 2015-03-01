@@ -1,0 +1,12 @@
+<h1>Current Songs for Playlist</h1>
+
+<ul>
+  <% @songs.each do |s| %>
+    <li>
+    <%= s.title %>-
+    <%= s.artist %>
+    <%= button_to 'Vote For', upvote_path, method: :post, class: "button"%>
+    <%= button_to 'Vote Against', downvote_path, method: :post, class: "button" %>
+    </li>
+  <% end %>
+</ul>

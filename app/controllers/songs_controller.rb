@@ -9,7 +9,6 @@ class SongsController < ApplicationController
   end
 
   def show
-    @songs = Song.all
   end
 
   def vote
