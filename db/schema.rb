@@ -58,4 +58,5 @@ ActiveRecord::Schema.define(version: 20150228233445) do
     t.datetime "updated_at", null: false
     t.integer  "user_vote"
   end
+
 end
