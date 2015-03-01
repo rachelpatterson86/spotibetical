@@ -5,6 +5,9 @@ Rails.application.routes.draw do
   post '/songs' => 'songs#submit'
   get '/songs' => 'songs#show'
   get '/playlists' => 'playlists#index', as: :playlists
+  post '/songs' => 'songs#upvote'
+  post '/songs' => 'songs#downvote'
+  post '/songs/veto' => 'songs#veto'
   # put '/playlists' => 'playlists#vote'
   # get '/playlists' => 'playlists#list'
   # get '/playlists' => 'playlists#play'
