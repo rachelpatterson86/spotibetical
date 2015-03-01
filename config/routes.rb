@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get '/songs' => 'songs#show'
   post '/songs' => 'songs#upvote'
   post '/songs' => 'songs#downvote'
+  post '/songs/veto' => 'songs#veto'
   # put '/playlists' => 'playlists#vote'
   # get '/playlists' => 'playlists#list'
   # get '/playlists' => 'playlists#play'
