@@ -9,6 +9,16 @@ class UsersController < ApplicationController
     #   format.js { render :results }
   end
 
+  def update_token
+    if params[:code]
+      current_user.get_token!(params[:code])
+      flash[:notice] = "Now that we're authenticated, you can share that playlist!"
+      redirect_to playlists_path
+    else
+      flash[:alert] = "Cannot share playlist without spotify account access."
+      redirect_to :root
+    end
+  end
 end
 
 # respond_to for HARD MODE. code in search method.

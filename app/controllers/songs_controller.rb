@@ -24,10 +24,30 @@ class SongsController < ApplicationController
     :user_vote => -1)
   end
 
+  def share
+    if !current_user.access_token
+      redirect_to build_auth_link
+    elsif current_user.token_expired?
+      current_user.refresh!
+    end
+    @playlist = Playlist.find(params[:id])
+    @playlist.share!(current_user)
+  end
+
 private
 
     def song_params
       params.require(:song).permit(:user_id, :artist, :title, :spotify_id)
+    end
+
+    def build_auth_link
+      auth_opts = {
+        :client_id => ENV["SPOTIFY_CLIENT_ID"],
+        :response_type => 'code',
+        :redirect_uri => my_new_token_path(current_user),
+        :scope => 'playlist-modify playlist-modify-public playlist-modify-private'
+      }.to_query
+      "https://accounts.spotify.com/authorize?" + auth_opts
     end
 end
 
