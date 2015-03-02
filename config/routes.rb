@@ -1,12 +1,12 @@
 Rails.application.routes.draw do
   devise_for :users
   get '/user' => "users#search"
-  root "users#search"
+  root "users#index"
   post '/songs' => 'songs#submit'
   get '/songs' => 'songs#show'
   get '/playlists' => 'playlists#index', as: :playlists
-  post '/songs' => 'songs#upvote'
-  post '/songs' => 'songs#downvote'
+  post '/songs' => 'songs#upvote', as: :upvote
+  post '/songs' => 'songs#downvote', as: :downvote
   post '/songs/veto' => 'songs#veto'
   # put '/playlists' => 'playlists#vote'
   # get '/playlists' => 'playlists#list'
