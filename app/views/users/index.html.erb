@@ -5,8 +5,9 @@
     <li>
     <%= s.title %>-
     <%= s.artist %>
-    <%= button_to 'Vote For', upvote_path %>
-    <%= button_to 'Vote Against', downvote_path %>            
+    <%= button_to 'Vote For', upvote_path(:song => {
+      id: s.id}) %>
+    <%= button_to 'Vote Against', downvote_path %>
     </li>
   <% end %>
 </ul>
