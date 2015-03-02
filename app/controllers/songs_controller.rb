@@ -2,22 +2,31 @@ class SongsController < ApplicationController
 
   def submit
     @song = Song.create(song_params)
-    upvote(@song)
+    @song.votes.create(:user_id => current_user.id,
+    :user_vote => 1)
     #@song.users = [current_user] better if there are no additional attributes
     vote_limit
-    redirect_to :action => :index
+    redirect_to :root
   end
 
   def show
   end
 
-  def vote
+
+  def upvote
     @song = Song.find(:id)
-    if current_user.find_by(veto: true)
-      flash[:alert] = "You've used your veto this week. Should have thought about it more wisely."
-    elsif @song.votes.find_by(user_vote: 0)
-      flash[:notice] = "Song has been veto and cannot be voted until next week."
-    elsif upvote(@song) || downvote(@song)
+    unless vote_check
+      song.votes.create(:user_id => current_user.id,
+                        :user_vote => 1)
+      vote_limit
+    end
+  end
+
+  def downvote
+    @song = Song.find(:id)
+    unless vote_check
+      song.votes.create(:user_id => current_user.id,
+                        :user_vote => -1)
       vote_limit
     end
   end
@@ -28,8 +37,7 @@ class SongsController < ApplicationController
       flash[:alert] = "You've used your veto this week. Should have thought about it more wisely."
     else
       @song.votes.create(:user_id => current_user.id, user_vote: 0)
-      current_user@user.update(veto: true)
-      #User.find(current_user.id).update(veto: 0)
+      current_user.update(veto: true)
       flash[:notice] = "You've used your single veto for this week."
     end
   end
@@ -60,14 +68,12 @@ class SongsController < ApplicationController
     "https://accounts.spotify.com/authorize?" + auth_opts
   end
 
-  def upvote(song)
-    song.votes.create(:user_id => current_user.id,
-                      :user_vote => 1)
-  end
-
-  def downvote(song)
-    song.votes.create(:user_id => current_user.id,
-                      :user_vote => -1)
+  def vote_check
+    if current_user.find_by(veto: true)
+      flash[:alert] = "You've used your veto this week. Should have thought about it more wisely."
+    elsif @song.votes.find_by(user_vote: 0)
+      flash[:notice] = "Song has been veto and cannot be voted until next week."
+    end
   end
 
   def vote_limit
@@ -76,4 +82,3 @@ class SongsController < ApplicationController
     end
   end
 end
-
