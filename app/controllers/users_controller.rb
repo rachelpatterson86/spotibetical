@@ -1,5 +1,9 @@
 class UsersController < ApplicationController
 
+  def index
+    @songs = Song.all
+  end
+
   def search
     if params[:q]
       @query = RSpotify::Track.search(params[:q], limit: 20)

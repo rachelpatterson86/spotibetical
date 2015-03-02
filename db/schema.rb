@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 20150228233445) do
     t.datetime "updated_at", null: false
   end
 
-  add_index "songs", ["spotify_id"], name: "index_songs_on_spotify_id", unique: true
+  add_index "songs", ["spotify_id"], name: "index_songs_on_spotify_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "",    null: false
@@ -42,10 +42,10 @@ ActiveRecord::Schema.define(version: 20150228233445) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "veto",                   default: false
     t.string   "access_token"
     t.string   "refresh_token"
     t.datetime "expires_at"
-    t.boolean  "veto",                   default: false
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
@@ -58,4 +58,5 @@ ActiveRecord::Schema.define(version: 20150228233445) do
     t.datetime "updated_at", null: false
     t.integer  "user_vote"
   end
+
 end

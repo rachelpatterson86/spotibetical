@@ -1,1 +1,11 @@
+<h1>Added Your Song to the playlist!</h1>
+  <ul>
+    <li>
+    <h3>song: <%= @song.title %>-
+        artist: <%= @song.artist %>
+    </h3>
+    </li>
+  </ul>   
 
+  <%= link_to "Search Again!", user_path %>
+  <%= link_to "Vote Page", root_path %>

@@ -1,9 +1,9 @@
-<header>
+<head>
   <%= form_tag("user", method: "get") do %> <!--add: , remote: true for hard mode -->
   <%= text_field_tag(:q, params[:q], placeholder: "Find Song Title") %>
   <%= submit_tag("Search") %>
   <% end %>
-</header>
+</head>
 
 <div class=content-wrapper>
   <h3>Songs from your search!</h3>
