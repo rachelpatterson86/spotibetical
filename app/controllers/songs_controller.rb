@@ -5,7 +5,7 @@ class SongsController < ApplicationController
     upvote(@song)
     #@song.users = [current_user] better if there are no additional attributes
     vote_limit
-    render :show
+    redirect_to :action => :index
   end
 
   def show

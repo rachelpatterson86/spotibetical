@@ -5,8 +5,8 @@
     <li>
     <%= s.title %>-
     <%= s.artist %>
-    <%= button_to 'Vote For', upvote_path, method: :post, class: "button"%>
-    <%= button_to 'Vote Against', downvote_path, method: :post, class: "button" %>
+    <%= button_to 'Vote For', upvote_path %>
+    <%= button_to 'Vote Against', downvote_path %>            
     </li>
   <% end %>
 </ul>
