@@ -1,56 +1,61 @@
 class SongsController < ApplicationController
+require 'vote_processor'
+#re-write logic. user can't submit song if votes are used up.
+# user can't veto song if song has been vetoed or they used their veto...
+#prevent submit if song already selected...
+#votes can be negative?
+  def index
+    @songs = Song.all
+  end
+
+  def search
+    @query_results = RSpotify::Track.search(params[:q], limit: 20) if params[:q]
+    # NOTE respond_to for HARD MODE. code in search method.
+
+    # respond_to do |format|
+    #   format.html { render :search }
+    #   format.js { render :results }
+  end
 
   def submit
-    @song = Song.create(song_params)
-    @song.votes.create(:user_id => current_user.id,
-    :user_vote => 1)
-    #@song.users = [current_user] better if there are no additional attributes
-    vote_limit
+    if Song.find_by_spotify_id(params[:song][:spotify_id]).nil?
+      @song = Song.create(song_params)
+      VoteProcessor.new(current_user, @song).vote(VoteProcessor::UP)
+    end
     redirect_to :root
   end
 
   def show
   end
 
-
   def upvote
-    @song = Song.find(:id)
-    unless vote_check
-      song.votes.create(:user_id => current_user.id,
-                        :user_vote => 1)
-      vote_limit
-    end
+    @song = Song.find(params[:id])
+    VoteProcessor.new(current_user, @song).vote(VoteProcessor::UP)
+    redirect_to :root
   end
 
   def downvote
-    @song = Song.find(:id)
-    unless vote_check
-      song.votes.create(:user_id => current_user.id,
-                        :user_vote => -1)
-      vote_limit
-    end
+    @song = Song.find(params[:id])
+    VoteProcessor.new(current_user, @song).vote(VoteProcessor::DOWN)
+    redirect_to :root
   end
 
   def veto
-    @song = Song.find(:id)
-    if current_user.veto == true
-      flash[:alert] = "You've used your veto this week. Should have thought about it more wisely."
-    else
-      @song.votes.create(:user_id => current_user.id, user_vote: 0)
-      current_user.update(veto: true)
-      flash[:notice] = "You've used your single veto for this week."
-    end
+    @song = Song.find(params[:id])
+    VoteProcessor.new(current_user, @song).veto
+    redirect_to :root
   end
 
-  def share
-    if !current_user.access_token
-      redirect_to build_auth_link
-    elsif current_user.token_expired?
-      current_user.refresh!
-    end
-    @playlist = Playlist.find(params[:id])
-    @playlist.share!(current_user)
-  end
+  # def share
+  #   if !current_user.access_token
+  #     redirect_to build_auth_link
+  #   elsif current_user.token_expired?
+  #     current_user.refresh_spotify!
+  #   end
+  #
+  #   @playlist = Playlist.find(params[:id])
+  #   @playlist.share!(current_user)
+  # end
 
   private
 
@@ -58,27 +63,16 @@ class SongsController < ApplicationController
     params.require(:song).permit(:user_id, :artist, :title, :spotify_id)
   end
 
-  def build_auth_link
-    auth_opts = {
-      :client_id => ENV["SPOTIFY_CLIENT_ID"],
-      :response_type => 'code',
-      :redirect_uri => my_new_token_path(current_user),
-      :scope => 'playlist-modify playlist-modify-public playlist-modify-private'
-    }.to_query
-    "https://accounts.spotify.com/authorize?" + auth_opts
-  end
-
-  def vote_check
-    if current_user.find_by(veto: true)
-      flash[:alert] = "You've used your veto this week. Should have thought about it more wisely."
-    elsif @song.votes.find_by(user_vote: 0)
-      flash[:notice] = "Song has been veto and cannot be voted until next week."
-    end
-  end
-
-  def vote_limit
-    if Vote.vote_counter(current_user)
-      flash[:alert] = "You've used all 15 votes this week."
-    end
-  end
+  # def build_auth_link
+  #   auth_opts = {
+  #     :client_id => ENV["SPOTIFY_CLIENT_ID"],
+  #     :response_type => 'code',
+  #     :redirect_uri => my_new_token_path(current_user),
+  #     :scope => 'playlist-modify playlist-modify-public playlist-modify-private'
+  #   }.to_query
+  #
+  #   "https://accounts.spotify.com/authorize?" + auth_opts
+  # end
 end
+
+# TODO: add flash alerts about voting eligibility...

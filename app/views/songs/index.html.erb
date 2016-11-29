@@ -1,0 +1,14 @@
+<h1>Current Songs for Playlist</h1>
+
+<%= link_to "Search Again!", songs_search_path %>
+
+<ul>
+  <% @songs.each do |song| %>
+    <li>
+    <%= song.title %>-
+    <%= song.artist %>
+    <%= button_to 'Up Vote', upvote_path(id: song.id ), class: 'btn btn-success btn-xs'  %>
+    <%= button_to 'Down Vote', downvote_path(id: song.id ), class: 'btn btn-danger btn-xs' %>
+    </li>
+  <% end %>
+</ul>
