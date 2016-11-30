@@ -4,12 +4,6 @@
 
 Build a community-generated playlist sharing site.
 
-## Suggested Schedule
-
-Day 1:
-* Get the user auth with devise setup
-* Add [rspotify][rspotify] to the gem file
-* Sign up for a [Spotify Developer/API key][spotify-api]
 * Read you some docs: [Asset Pipeline][assets], [Unobtrusive JS][ujs], [Tim's notes from Week 2][tim-w2]
 
 [rspotify]: https://github.com/guilhermesad/rspotify
@@ -42,10 +36,10 @@ Day 5/6:
 - [x] Users can propose songs for the week's playlist
 - [x] Users can spend points to vote on proposed songs
 - [ ] At the end of the week, the top rated song is chosen for each letter A-Z and added to a playlist; that playlist is pushed to Spotify
-- [ ] Users get a fixed number of points to spend at the start of each week
-- [ ] Users get a bonus based on how many people voted for their suggestions last week
-- [ ] Points do _not_ transfer week-to-week (use it or lose it)
-- [ ] Users can veto one song pick per week
+- [x] Users get a fixed number of points to spend at the start of each week
+- [ ] Users get a bonus based on how many people voted for their suggestions last week (use or loose)
+- [x] Points do _not_ transfer week-to-week (use it or lose it)
+- [x] Users can veto one song pick per week
 - [ ] Deploy your app to Heroku
 
 ### Hard Mode

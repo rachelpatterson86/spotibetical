@@ -5,12 +5,33 @@ class User < ActiveRecord::Base
   has_many :songs, through: :votes
   has_one :song
 
+  VOTE_LIMIT = 5
+
   def at_vote_limit?
-    votes.count < 5
+    used_votes.count < VOTE_LIMIT
   end
 
   def vetoed
     update(veto: true)
+  end
+
+  def used_votes
+    last_friday = date_of_last('Friday').to_time
+
+    votes
+      .where.not(user_vote: 0)
+      .where(created_at: last_friday..Time.current)
+  end
+
+  def remaining_votes
+    VOTE_LIMIT - used_votes.count
+  end
+
+  private
+  def date_of_last(day)
+    date  = Date.parse(day)
+    delta = date > Date.today ? 7 : 0
+    date - delta
   end
 
   # def get_spotify_token!(auth_code)
