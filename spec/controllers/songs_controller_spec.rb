@@ -12,6 +12,7 @@ RSpec.describe SongsController, :type => :controller do
   let(:song) { Song.create(user: song_submitted_user, spotify_id: 12345) }
 
   login_voter
+  before { UserVote.create(user: User.first) }
 
   describe 'GET index' do
     it 'renders root' do
@@ -28,6 +29,7 @@ RSpec.describe SongsController, :type => :controller do
   end
 
   describe 'POST submit' do
+
     it 'redirects to root' do
       post :submit, { song: { user_id: song_submitted_user.id } }
       expect(response).to have_http_status(302)
@@ -48,7 +50,7 @@ RSpec.describe SongsController, :type => :controller do
 
       it 'upvotes a song' do
         post :submit, { song: { user_id: song_submitted_user.id } }
-        expect(Song.last.votes.first.user_vote).to eq(1)
+        expect(Song.last.votes.first.score).to eq(1)
       end
     end
 
@@ -75,8 +77,8 @@ RSpec.describe SongsController, :type => :controller do
 
     context 'when a song CAN be upvoted' do
       let!(:voteable_song) do
-        Vote.create(song: song, user: song_submitted_user, user_vote: 1)
-        Vote.create(song: song, user: voter2, user_vote: 1)
+        Vote.create(song: song, user: song_submitted_user, score: 1)
+        Vote.create(song: song, user: voter2, score: 1)
       end
 
       it 'creates a vote' do
@@ -88,14 +90,14 @@ RSpec.describe SongsController, :type => :controller do
       it 'upvotes a song' do
         song.votes
         post :upvote, id: song.id
-        expect(song.votes.last.user_vote).to eq(1)
+        expect(song.votes.last.score).to eq(1)
       end
     end
 
     context 'when a song CANNOT be upvoted' do
       let!(:vetoed_song) do
-        Vote.create(song: song, user: song_submitted_user, user_vote: 1)
-        Vote.create(song: song, user: voter2, user_vote: 0)
+        Vote.create(song: song, user: song_submitted_user, score: 1)
+        Vote.create(song: song, user: voter2, score: 0)
       end
 
       it 'it does not create a vote' do
@@ -116,8 +118,8 @@ RSpec.describe SongsController, :type => :controller do
 
     context 'when a song CAN be downvoted' do
       let!(:voteable_song) do
-        Vote.create(song: song, user: song_submitted_user, user_vote: -1)
-        Vote.create(song: song, user: voter2, user_vote: -1)
+        Vote.create(song: song, user: song_submitted_user, score: -1)
+        Vote.create(song: song, user: voter2, score: -1)
       end
 
       it 'creates a vote' do
@@ -129,14 +131,14 @@ RSpec.describe SongsController, :type => :controller do
      it 'downvotes a song' do
        song.votes
        post :downvote, id: song.id
-       expect(song.votes.last.user_vote).to eq(-1)
+       expect(song.votes.last.score).to eq(-1)
       end
     end
 
     context 'when a song CANNOT be downvoted' do
       let!(:vetoed_song) do
-        Vote.create(song: song, user: song_submitted_user, user_vote: 1)
-        Vote.create(song: song, user: voter2, user_vote: 0)
+        Vote.create(song: song, user: song_submitted_user, score: 1)
+        Vote.create(song: song, user: voter2, score: 0)
       end
 
       it 'it does not create a vote' do
@@ -148,6 +150,7 @@ RSpec.describe SongsController, :type => :controller do
   end
 
   describe 'POST veto' do
+
     it 'redirects to root' do
       post :veto, id: song.id
       expect(response).to have_http_status(302)
@@ -157,8 +160,8 @@ RSpec.describe SongsController, :type => :controller do
 
     context 'when a song CAN be vetoed' do
       let!(:vetoable_song) do
-        Vote.create(song: song, user: song_submitted_user, user_vote: 1)
-        Vote.create(song: song, user: voter2, user_vote: 1)
+        Vote.create(song: song, user: song_submitted_user, score: 1)
+        Vote.create(song: song, user: voter2, score: 1)
       end
 
       it 'creates a vote' do
@@ -170,14 +173,14 @@ RSpec.describe SongsController, :type => :controller do
      it 'vetos a song' do
        song.votes
        post :veto, id: song.id
-       expect(song.votes.last.user_vote).to eq(0)
+       expect(song.votes.last.score).to eq(0)
       end
     end
 
     context 'when a song CANNOT be vetoed' do
       let!(:vetoed_song) do
-        Vote.create(song: song, user: song_submitted_user, user_vote: 1)
-        Vote.create(song: song, user: voter2, user_vote: 0)
+        Vote.create(song: song, user: song_submitted_user, score: 1)
+        Vote.create(song: song, user: voter2, score: 0)
       end
 
       it 'it does not create a vote' do

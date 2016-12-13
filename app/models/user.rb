@@ -4,27 +4,24 @@ class User < ActiveRecord::Base
   has_many :votes
   has_many :songs, through: :votes
   has_one :song
+  has_one :user_vote
 
-  VOTE_LIMIT = 5
+  after_create :create_user_vote
 
-  def at_vote_limit?
-    used_votes.count < VOTE_LIMIT
+  def create_user_vote
+    UserVote.create(user: self)
   end
 
   def vetoed
-    update(veto: true)
+    user_vote.update(veto: true)
   end
 
   def used_votes
     last_friday = date_of_last('Friday').to_time
 
     votes
-      .where.not(user_vote: 0)
+      .where.not(score: 0)
       .where(created_at: last_friday..Time.current)
-  end
-
-  def remaining_votes
-    VOTE_LIMIT - used_votes.count
   end
 
   private
