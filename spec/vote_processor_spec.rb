@@ -102,7 +102,6 @@ RSpec.describe VoteProcessor do
   describe '#remove_bonus' do
     before do
       UserVote.create(user: current_voter, bonus_votes: bonus_votes)
-
       subject.remove_bonus
     end
 

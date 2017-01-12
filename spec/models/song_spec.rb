@@ -22,6 +22,11 @@ RSpec.describe Song, :type => :model do
       expect(assc.macro).to eq :has_many
     end
 
+    it "has many playlists" do
+      assc = described_class.reflect_on_association(:playlists)
+      expect(assc.macro).to eq :has_many
+    end
+
     it "belongs to a user" do
       assc = described_class.reflect_on_association(:user)
       expect(assc.macro).to eq :belongs_to
