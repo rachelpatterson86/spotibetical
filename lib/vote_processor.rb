@@ -12,8 +12,8 @@ class VoteProcessor
   def vote(score)
     return unless vote_eligible?
     Vote.create(user: @user, song: @song, score: score )
-    add_bonus if score == UP #TODO test this...
-    remove_bonus #TODO test this...
+    add_bonus if score == UP
+    remove_bonus
   end
 
   def veto

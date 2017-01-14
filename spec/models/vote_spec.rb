@@ -44,7 +44,7 @@ RSpec.describe Vote, :type => :model do
       end
     end
   end
-  describe '#playlist_contenders' do
+  describe '#current_week_tally' do
     before do
       Song.create(user_id: 1, spotify_id: 1, title: 'A')
       Song.create(user_id: 2, spotify_id: 2, title: 'aba')
@@ -60,7 +60,7 @@ RSpec.describe Vote, :type => :model do
     end
 
     it do
-      result = Vote.playlist_contenders
+      result = Vote.current_week_tally
       expect(result.length).to eq(4)
       expect(result[[1, "A"]]).to eq(1)
       expect(result[[2, "aba"]]).to eq(1)
@@ -77,7 +77,7 @@ RSpec.describe Vote, :type => :model do
     end
 
     it 'does not include the song' do
-      result = Vote.playlist_contenders
+      result = Vote.current_week_tally
       expect(result.count).to eq(0)
     end
   end
@@ -92,7 +92,7 @@ RSpec.describe Vote, :type => :model do
     end
 
     it 'does not include the song' do
-      result = Vote.playlist_contenders
+      result = Vote.current_week_tally
       expect(result.count).to eq(0)
     end
   end
@@ -107,7 +107,7 @@ RSpec.describe Vote, :type => :model do
     end
 
     it 'does not include the song' do
-      result = Vote.playlist_contenders
+      result = Vote.current_week_tally
       expect(result.count).to eq(0)
     end
   end

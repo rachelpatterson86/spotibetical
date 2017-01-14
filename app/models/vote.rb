@@ -7,7 +7,7 @@ class Vote < ActiveRecord::Base
   scope :vetoed, -> { where(score: 0) }
   scope :last_7_days, -> { where(created_at: 7.days.ago..Time.current) }
 
-  def self.playlist_contenders
+  def self.current_week_tally
     Vote.last_7_days
       .where.not(song_id: vetoed.pluck(:song_id))
       .joins(:song)
