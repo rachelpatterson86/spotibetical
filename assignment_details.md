@@ -28,13 +28,25 @@ Day 5/6:
 - [x] Points do _not_ transfer week-to-week (use it or lose it)
 - [x] Users can veto one song pick per week
 - [x] Add top rated song for each letter A-Z for the week to a playlist
+
+- [ ] Add a view to show all playlists. send to spotfy button to your own spotify acct.
 - [ ] Push that playlist to a user's Spotify
   - https://github.com/guilhermesad/rspotify#rails--oauth
+  X- find out what's need to push the songs onto spotify
+  x- Add link to sign into Spotify (allow users to push playlist to Spotify.)
+  x- possibly link spotify stuff with devise? **Remove devise?**
+
+  x users#spotify: create test to log into spotify
+  x- SendPlaylistToSpotify: create tests to push playlist to spotify!
+
+  - if a playlist is present, allow for them to upload it! need a playlist page with a list of playlist!
+    - Add to Spotify button on each available playlist!
+
 - [ ] Create better front end!
 - [ ] Deploy your app to Heroku
 
 **for now have a button to generate a playlist from voted songs**
-* Add an endpoint to view playlists from past week and a button to click that adds the playlist to the current user's spotify account. Top 5 songs only.
+* Add an endpoint to view playlists from past week and a button to click that adds the playlist to the current user's spotify account.
 * (This will involve OAuth authentication flows.)
 
 ### Hard Mode
