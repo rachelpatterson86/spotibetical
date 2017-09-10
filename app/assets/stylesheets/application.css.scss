@@ -1,0 +1,108 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+// tags
+body {
+  font-family: "Open Sans", Helvetica, Arial, sans-serif;
+  font-size: 16px;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+  border: 1px solid #1ed760;
+  -webkit-box-shadow: 0 0 0px 1000px white inset;
+}
+
+input[type=checkbox]:focus {
+    border-color: #1ed760;
+    background-color: #1ed760;
+}
+
+label {
+  font-weight: normal;
+}
+
+a {
+    color: #2ebd59;
+}
+
+a:hover, a:focus {
+    color: #1ed760;
+    text-decoration: none;
+}
+
+// buttons
+.btn-block {
+  border-radius: 25px;
+  width: 100%;
+}
+
+.btn-green {
+  color: white;
+  background-color: #2ebd59;
+}
+
+.btn-green:hover {
+  color: white;
+  background-color: #1ed760;
+}
+
+// other
+.text-center {
+  text-align: center;
+}
+
+.gray {
+  color: gray;
+}
+
+.mts {
+  margin-top: 0.5em;
+}
+
+.ptl {
+  padding-top: 2em;
+}
+
+.mtm {
+  margin-top: 1.5em;
+}
+
+.mtxl {
+  margin-top: 4.5em
+}
+
+// header
+.header {
+  border-bottom: 1px solid;
+}
+
+ul.login-nav {
+	list-style: none;
+	}
+	ul.login-nav li {
+		display: inline;
+	}
+
+.logo {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bold;
+  font-size: 40px;
+}

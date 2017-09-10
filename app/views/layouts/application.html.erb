@@ -3,16 +3,30 @@
 <head>
   <title>Spotify</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag 'application', 'https://fonts.googleapis.com/css?family=Montserrat:700' %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag :defaults %>
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <div class="row header">
+    <div class="col-sm-1">
+      <img src="http://pixel.nymag.com/imgs/daily/vulture/2015/06/26/26-spotify.w529.h529.jpg" height="100px" width="100px">
+    </div>
+    <div class="col-sm-3 mtm">
+      <div class="logo">Spotibetical</div>
+    </div>
+    <div class="col-sm-3 col-sm-offset-5 mtxl">
+      <ul class="login-nav">
+        <li><%= link_to "Sign In", new_user_session_path %></li> |
+        <li><%= link_to "Sign Out", destroy_user_session_path, :method => :delete %></li> |
+        <li><%= link_to "Register", new_user_registration_path %></li>
+      </ul>
+    </div>
+  </div>
   <p class="notice"><%= notice %></p>
   <p class="alert"><%= alert %></p>
-  <%= link_to "Sign In", new_user_session_path, class: 'btn btn-success btn-xs' %>
-  <%= link_to "Sign Out", destroy_user_session_path, :method => :delete, class: 'btn btn-warning btn-xs' %>
-  <%= link_to "Register", new_user_registration_path, class: 'btn btn-success btn-xs' %>
+
 <%= yield %>
 
 </body>
