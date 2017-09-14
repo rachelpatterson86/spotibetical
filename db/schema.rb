@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161213175316) do
+ActiveRecord::Schema.define(version: 20170914001023) do
 
   create_table "playlist_songs", force: :cascade do |t|
     t.integer "playlist_id"
@@ -37,16 +37,6 @@ ActiveRecord::Schema.define(version: 20161213175316) do
   end
 
   add_index "songs", ["spotify_id"], name: "index_songs_on_spotify_id"
-
-  create_table "user_votes", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "bonus_votes"
-    t.boolean  "veto",        default: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "user_votes", ["user_id"], name: "index_user_votes_on_user_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
