@@ -1,14 +1,17 @@
-<h1>Current Songs for Playlist</h1>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3 content mas">
+    <h1>Vote for the songs!</h1>
+    <div class="pas">
+      <%= link_to "Search Again!", songs_search_path %>
 
-<%= link_to "Search Again!", songs_search_path %>
-
-<ul>
-  <% @songs.each do |song| %>
-    <li>
-    <%= song.title %>-
-    <%= song.artist %>
-    <%= button_to 'Up Vote', vote_path(id: song.id ), class: 'btn btn-success btn-xs', params: { vote: '1'} %>
-    <%= button_to 'Down Vote', vote_path(id: song.id ), class: 'btn btn-danger btn-xs', params: { vote: '-1'}%>
-    </li>
-  <% end %>
-</ul>
+      <% @songs.each do |song| %>
+      <div>
+        <%= link_to fa_icon("arrow-circle-o-up"), vote_path(id: song.id ), params: { vote: '1'} %>
+        <%= link_to fa_icon("arrow-circle-o-down"), vote_path(id: song.id ), params: { vote: '-1'}%>
+        <%= song.title %>
+        <%= song.artist %>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>

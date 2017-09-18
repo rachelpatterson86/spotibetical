@@ -34,7 +34,7 @@ gem 'pry-rails'
 gem 'bootstrap-sass'
 gem 'better_errors'
 gem 'httparty'
-
+gem "font-awesome-rails"
 gem 'rspec'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -64,7 +64,7 @@ group :development, :test do
 end
 
 group :test do
-  gem 'shoulda-matchers'#, require: false  
+  gem 'shoulda-matchers'#, require: false
 end
 
 group :production do
