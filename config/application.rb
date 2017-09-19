@@ -5,6 +5,8 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 # Date.prepend ActiveSupport::CoreExt::DateAndTime::Calculations
+RSpotify.authenticate("05fa9f52e704407f886aece1d2b2d858", "291cfd43ea104610afd11631da4480af")
+
 module Spotify
   class Application < Rails::Application
     config.autoload_paths << Rails.root.join('lib')

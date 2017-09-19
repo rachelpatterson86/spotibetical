@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
-
+  def spotify
+      redirect_to '/'
+    end
 # TODO: may need to check out the logic for update token...
   # def update_token
   #   if params[:code]
@@ -12,9 +14,3 @@ class UsersController < ApplicationController
   #   end
   # end
 end
-
-#play song, ex: https://open.spotify.com/track/61fVrohjzviG6WWoo8Ihnl
-#@query.first.external_urls["spotify"]
-
-#artist name
-#@query.first.artists.artist_name
