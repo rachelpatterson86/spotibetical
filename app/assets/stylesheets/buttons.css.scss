@@ -1,0 +1,33 @@
+.btn:focus {
+  outline: 0;
+  color: white;
+}
+
+.btn-block {
+  border-radius: 25px;
+  width: 100%;
+}
+
+.btn-green {
+  color: white;
+  background-color: $green;
+
+  &:hover {
+    color: white;
+    background-color: $neon-green;
+  }
+}
+
+.btn-black {
+  color: $green;
+  background-color: black;
+
+  &:hover {
+    color: $neon-green;
+    background-color: black;
+  }
+}
+
+.btn-sm {
+  max-width: 65px;
+}

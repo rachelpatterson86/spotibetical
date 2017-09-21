@@ -1,15 +1,4 @@
 /*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
- * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any styles
- * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
- * file per style scope.
- *
  *= require_tree .
  *= require_self
  */
@@ -17,23 +6,31 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import "font-awesome";
+@import "spacings";
+@import "buttons";
 
-// tags
+$green: #2ebd59;
+$neon-green: #1ed760;
+
+// elements
 body {
   font-family: "Open Sans", Helvetica, Arial, sans-serif;
   font-size: 16px;
 }
 
+input:hover,
+input:focus,
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
-input:-webkit-autofill:focus {
-  border: 1px solid #1ed760;
+input:-webkit-autofill:focus,
+.form-control:focus {
+  border: 1px solid $neon-green;
   -webkit-box-shadow: 0 0 0px 1000px white inset;
 }
 
 input[type=checkbox]:focus {
-    border-color: #1ed760;
-    background-color: #1ed760;
+    border-color: $neon-green;
+    background-color: $neon-green;
 }
 
 label {
@@ -42,30 +39,40 @@ label {
 
 a {
     color: #2ebd59;
+
+    &:hover, &:focus {
+        color: $neon-green;
+        text-decoration: none;
+    }
 }
 
-a:hover, a:focus {
-    color: #1ed760;
-    text-decoration: none;
+//typography
+.font-small {
+  font-size: 0.75em;
 }
 
-// buttons
-.btn-block {
-  border-radius: 25px;
-  width: 100%;
+.font-large {
+  font-size: 1.75em;
 }
 
-.btn-green {
-  color: white;
-  background-color: #2ebd59;
+.bold {
+  font-weight: bold;
 }
 
-.btn-green:hover {
-  color: white;
-  background-color: #1ed760;
+// headers
+.header {
+  border-bottom: 1px solid;
 }
 
-// other
+ul.login-nav {
+	list-style: none;
+
+  li {
+		display: inline;
+	}
+}
+
+//other
 .text-center {
   text-align: center;
 }
@@ -74,44 +81,17 @@ a:hover, a:focus {
   color: gray;
 }
 
-.mts {
-  margin-top: 0.5em;
-}
-
-.ptl {
-  padding-top: 2em;
-}
-
-.mtm {
-  margin-top: 1.5em;
-}
-
-.mtxl {
-  margin-top: 4.5em
-}
-
-// header
-.header {
-  border-bottom: 1px solid;
-}
-
-ul.login-nav {
-	list-style: none;
-	}
-	ul.login-nav li {
-		display: inline;
-	}
-
 .logo {
   font-family: 'Montserrat', sans-serif;
-  font-weight: bold;
-  font-size: 40px;
+  @extend .bold;
+  font-size: 3em;
 }
 
 .content {
-  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 3px -2px rgba(0, 0, 0, 0.2);
 }
 
-.pas {
-  padding: 2em;
+.search-input {
+  height: inherit;
+  @extend .font-large;
 }

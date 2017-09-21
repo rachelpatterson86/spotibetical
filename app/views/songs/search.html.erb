@@ -1,34 +1,47 @@
-<head>
-<%= form_tag('search', method: "get") do %>
-  <%= text_field_tag(:query, params[:query], placeholder: "Find Song Title") %>
-  <%= submit_tag("Search") %>
-<% end %>
-</head>
-
-<%= link_to "Vote Page", root_path %>
-
-<div class=content-wrapper>
-  <h3>Songs from your search!</h3>
-  <div class=song-query>
-    <% if @query_results %>
-    <ul id="search-results">
-      <% @query_results.each do |result| %>
-        <li><%= result.artists[0].name %> : <%= result.name %></li>
-        <li><%=image_tag(result.album.images[2]['url'])%></li>
-        <li><%= button_to(
-          'Suggest Song',
-          songs_path(song: {
-            artist: result.artists[0].name,
-            title: result.name,
-            :spotify_id => result.id
-            }),
-          method: :post,
-          class: "button",
-          params: { vote: '1'} )
-            %>
-        </li>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <div class="row mbl">
+      <%= form_tag('search', method: "get") do %>
+      <div class="col-md-10 pln">
+        <%= text_field_tag(:query, params[:query], placeholder: "Search by Song or Artist", class: 'form-control search-input') %>
+      </div>
+      <div class="col-md-2 phn">
+        <%= submit_tag("Search", class: 'btn btn-green btn-block font-large')%>
+      </div>
       <% end %>
-    </ul>
-    <% end %>
+    </div>
+    <%= link_to "Vote Page", root_path %>
+
+    <div class=content-wrapper>
+      <div class=song-query>
+        <% if @songs %>
+          <% @songs.each do |song| %>
+          <div class="row pvs mbs content">
+            <div class="col-md-2 prn"><%=image_tag(song.album.images[2]['url'])%></div>
+            <div class="col-md-8 pln prn">
+              <div>
+                <div class="font-large bold"><%= song.name %></div>
+                <div class="font-small"><%= song.artists[0].name %> : <%= song.album.name %></div>
+              </div>
+            </div>
+            <div class="col-md-2">
+              <div>
+                  <%= link_to('Preview',song.preview_url, class: "btn btn-black btn-sm right", disabled: song.preview_url.nil?)%>
+              </div>
+              <div>
+                <%= button_to(
+                'Suggest',
+                songs_path(song: {artist: song.artists[0].name, title: song.name, spotify_id: song.id}),
+                method: :post,
+                class: "btn btn-black btn-sm right mts",
+                params: { vote: '1'} )
+                  %>
+              </div>
+            </div>
+          </div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
   </div>
 </div>

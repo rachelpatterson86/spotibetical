@@ -1,0 +1,47 @@
+//positioning
+$areas: margin, padding;
+$directions: top, right, bottom, left;
+$sizes: 'n' 0, 'xs' 0.25em, 's' 0.5em, 'm' 1em, 'l' 2em;
+
+// margin & padding size with directions:
+// mtn mtxs mts mtm mtl mrn mrxs mrs mrm mrl mbn mbxs mbs mbm mll mln mlxs mls mlm mll
+// ptn ptxs pts ptm ptl prn prxs prs prm prl pbn pbxs pbs pbm pll pln plxs pls plm pll
+
+@each $area in $areas {
+  @each $direction in $directions {
+    @each $size in $sizes {
+      .#{str-slice($area, 0, 1)}#{str-slice($direction, 0, 1)}#{nth($size, 1)} {
+        #{$area}-#{$direction}: #{nth($size,2)};
+      }
+    }
+  }
+}
+
+// margin & padding size with broader directions:
+// man maxs mas mam mal mhn mhxs mhs mhm mhl mvn mvxs mvs mvm mvl
+// pan paxs pas pam pal phn phxs phs phm phl pvn pvxs pvs pvm pvl
+
+$dirs: 'around', 'verticle', 'horizontal';
+@each $area in $areas {
+  @each $dir in $dirs {
+    @each $size in $sizes {
+      .#{str-slice($area, 0, 1)}#{str-slice($dir, 0, 1)}#{nth($size, 1)} {
+        @if $dir == around {
+          #{$area}: #{nth($size,2)};
+        }
+        @if $dir == horizontal {
+          #{$area}-left: #{nth($size,2)};
+          #{$area}-right: #{nth($size,2)};
+        }
+        @if $dir == verticle {
+          #{$area}-top: #{nth($size,2)};
+          #{$area}-bottom: #{nth($size,2)};
+        }
+      }
+    }
+  }
+}
+
+.right {
+  float: right;
+}
