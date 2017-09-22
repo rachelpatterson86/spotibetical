@@ -1,6 +1,9 @@
+$green: #2ebd59;
+$neon-green: #1ed760;
+
 .btn:focus {
   outline: 0;
-  color: white;
+  // color: white;
 }
 
 .btn-block {
@@ -14,7 +17,7 @@
 
   &:hover {
     color: white;
-    background-color: $neon-green;
+    background-color: $neon-green !important;
   }
 }
 

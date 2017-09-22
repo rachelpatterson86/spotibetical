@@ -1,16 +1,29 @@
-<div class="row mt">
-  <div class="col-md-6 col-md-offset-3 content mas">
-    <h1>Vote for the songs!</h1>
-    <div class="pal">
-      <%= link_to "Search Again!", songs_search_path %>
-
+<div class="row">
+  <div class="col-md-6 col-md-offset-3 content">
+    <div class="pas">
+      <h1>Vote for all the songs. Ok. Not really. You only have 5 votes.</h1>
+      <%= link_to "Find new songs to add!", songs_search_path %>
       <% @songs.each do |song| %>
-      <div>
-        <%= link_to fa_icon("arrow-circle-o-up"), vote_path(id: song.id ), params: { vote: '1'},method: :post %>
-        <%= link_to fa_icon("arrow-circle-o-down"), vote_path(id: song.id ), params: { vote: '-1'} ,method: :post%>
-        <%= song.title %>
-        <%= song.artist %>
-      </div>
+        <div class="row song-separator pvs">
+          <div class="col-md-1 prn">
+            <div style="height:100%">
+              <div class="left font-large bold gray ptxs">
+                <%= song.votes.count %>
+              </div>
+              <div class="text-right">
+                <%= link_to fa_icon("arrow-circle-o-up", class: "font-large"), vote_path(id: song.id ), params: { vote: '1'},method: :post %>
+                <%= link_to fa_icon("arrow-circle-o-down", class: "font-large"), vote_path(id: song.id ), params: { vote: '-1'} ,method: :post%>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-10 prn">
+            <div class="font-large bold"><%= song.title %></div>
+            <div class="font-small"><%= song.artist %> : <%= 'song.album.name' %></div>
+          </div>
+          <div class="col-md-1 ptm">
+            <%= link_to('Preview',songs_search_path, class: "btn btn-black btn-sm right")%>
+          </div>
+        </div>
       <% end %>
     </div>
   </div>

@@ -18,8 +18,6 @@ body {
   font-size: 16px;
 }
 
-input:hover,
-input:focus,
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
@@ -59,6 +57,14 @@ a {
   font-weight: bold;
 }
 
+.song-separator {
+  border-bottom: 1px solid lightgray;
+}
+
+.song-separator:last-of-type {
+  border-bottom: none;
+}
+
 // headers
 .header {
   border-bottom: 1px solid;
@@ -77,6 +83,9 @@ ul.login-nav {
   text-align: center;
 }
 
+.text-right {
+  text-align: right;
+}
 .gray {
   color: gray;
 }
