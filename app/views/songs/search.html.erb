@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row ptl">
   <div class="col-md-6 col-md-offset-3">
     <div class="row mbl">
       <%= form_tag('search', method: "get") do %>
@@ -26,16 +26,23 @@
             </div>
             <div class="col-md-2">
               <div>
-                  <%= link_to('Preview',song.preview_url, class: "btn btn-black btn-sm right", disabled: song.preview_url.nil?)%>
+                  <%= link_to('Preview', song.preview_url, class: "btn btn-black btn-sm right", disabled: song.preview_url.nil?, target: "_blank")%>
               </div>
               <div>
                 <%= button_to(
-                'Suggest',
-                songs_path(song: {artist: song.artists[0].name, title: song.name, spotify_id: song.id}),
-                method: :post,
-                class: "btn btn-black btn-sm right mts",
-                params: { vote: '1'} )
-                  %>
+                  'Suggest',
+                  songs_path({
+                    artist: song.artists[0].name,
+                    title: song.name,
+                    spotify_id: song.id,
+                    image_url: song.album.images[2]['url'],
+                    preview_url: song.preview_url,
+                    album: song.album.name
+                  }),
+                  method: :post,
+                  class: "btn btn-black btn-sm right mts",
+                  params: { vote: '1'}
+                ) %>
               </div>
             </div>
           </div>

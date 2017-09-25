@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users
-  get '/songs/search' => "songs#search"
+  get '/search' => "songs#search"
   root "songs#index"
   post '/songs' => 'songs#submit'
   get '/songs' => 'songs#show'
