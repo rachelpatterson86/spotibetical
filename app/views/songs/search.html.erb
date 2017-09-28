@@ -11,6 +11,9 @@
       <% end %>
     </div>
     <%= link_to "Vote Page", root_path %>
+    <%if current_user.votes.recent_date_range.count == 5 %>
+      <div class="font-large dark-green">Oh noes! You've used up all your votes for the week. Play again next week. In the meantime, feel free to preview songs from your search</div>
+    <% end %>
 
     <div class=content-wrapper>
       <div class=song-query>
@@ -42,7 +45,7 @@
                   method: :post,
                   class: "btn btn-black btn-sm right mts",
                   params: { vote: '1'},
-                  disabled: song.submitted
+                  disabled: song.submitted || current_user.votes.recent_date_range.count == 5
                 ) %>
               </div>
               <%if song.submitted %>
