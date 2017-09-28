@@ -26,7 +26,7 @@
             </div>
             <div class="col-md-2">
               <div>
-                  <%= link_to('Preview', song.preview_url, class: "btn btn-black btn-sm right", disabled: song.preview_url.nil?, target: "_blank")%>
+                <%= link_to('Preview', song.preview_url, class: "btn btn-black btn-sm right", disabled: song.preview_url.nil?, target: "_blank")%>
               </div>
               <div>
                 <%= button_to(
@@ -41,9 +41,13 @@
                   }),
                   method: :post,
                   class: "btn btn-black btn-sm right mts",
-                  params: { vote: '1'}
+                  params: { vote: '1'},
+                  disabled: song.submitted
                 ) %>
               </div>
+              <%if song.submitted %>
+                <div class="font-xs text-right dark-green">Already submitted</div>
+              <% end %>
             </div>
           </div>
           <% end %>

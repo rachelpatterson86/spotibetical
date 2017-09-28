@@ -1,7 +1,12 @@
 <div class="row">
   <div class="col-md-6 col-md-offset-3 content">
     <div class="pas">
-    <h1>Vote for all the songs. Ok. Not really. You only have 5 votes left...</h1>
+    <h1>Vote for all the songs!</h1>
+    <% if current_user %>
+      <h1>Ok. Not really. You have <%= 5 - current_user.votes.recent_date_range.count %> votes left...</h1>
+    <% else %>
+    <h1>Ok. Not really. You need to login first</h1>
+    <% end %>
     <%= link_to "Find new songs to add!", search_path %>
     <% @songs.each do |song| %>
       <div class="row song-separator pvs">

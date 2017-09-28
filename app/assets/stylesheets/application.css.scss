@@ -45,6 +45,10 @@ a {
 }
 
 //typography
+.font-xs {
+  font-size: 0.6em;
+}
+
 .font-small {
   font-size: 0.75em;
 }
@@ -86,8 +90,13 @@ ul.login-nav {
 .text-right {
   text-align: right;
 }
+
 .gray {
   color: gray;
+}
+
+.dark-green {
+  color: darkgreen;
 }
 
 .logo {
