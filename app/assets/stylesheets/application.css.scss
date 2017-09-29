@@ -57,6 +57,10 @@ a {
   font-size: 1.75em;
 }
 
+.font-xl {
+  font-size: 2em;
+}
+
 .bold {
   font-weight: bold;
 }
@@ -99,6 +103,14 @@ ul.login-nav {
   color: darkgreen;
 }
 
+.blue {
+  color: blue;
+}
+
+.dark-red {
+  color: darkred;
+}
+
 .logo {
   font-family: 'Montserrat', sans-serif;
   @extend .bold;
@@ -112,4 +124,9 @@ ul.login-nav {
 .search-input {
   height: inherit;
   @extend .font-large;
+}
+
+.fa-disabled {
+  opacity: 0.6;
+  pointer-events: none;
 }

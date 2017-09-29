@@ -1,0 +1,6 @@
+<%if user_vote_for_song(song.id) %>
+  <div class="font-xs text-right blue">Voted by you</div>
+<% end %>
+<%if vetoed?(song) %>
+  <div class="font-xs text-right dark-red">Vetoed by you</div>
+<% end %>

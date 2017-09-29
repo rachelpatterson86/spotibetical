@@ -1,39 +1,43 @@
 <div class="row">
-  <div class="col-md-6 col-md-offset-3 content">
+  <div class="col-md-6 col-md-offset-3 content mtl">
     <div class="pas">
     <h1>Vote for all the songs!</h1>
     <% if current_user %>
-      <h1>Ok. Not really. You have <%= 5 - current_user.votes.recent_date_range.count %> votes left...</h1>
+      <h1>Ok. Not really. You have <%= remaining_votes %> votes left...</h1>
     <% else %>
-    <h1>Ok. Not really. You need to login first</h1>
+      <h1>Ok. Not really. You need to login first</h1>
     <% end %>
     <%= link_to "Find new songs to add!", search_path %>
     <% @songs.each do |song| %>
       <div class="row song-separator pvs">
-        <div class="col-md-1 prn">
-          <div style="height:100%">
-            <div class="left font-large bold gray ptxs">
-              <%= song.votes.count %>
-            </div>
-            <div class="text-right">
-              <%= link_to fa_icon("arrow-circle-o-up", class: "font-large"), vote_path(id: song.id ), params: { vote: '1'},method: :post %>
-              <%= link_to fa_icon("arrow-circle-o-down", class: "font-large"), vote_path(id: song.id ), params: { vote: '-1'} ,method: :post%>
+        <div class="<%= 'fa-disabled' if max_user_vote? %>">
+          <div class="col-md-1 prn">
+            <div style="height:100%">
+              <div class="left font-large bold gray ptxs">
+                <%= song_vote_count(song) %>
+              </div>
+                <div class="text-right <%'fa-disabled' if vote_ineligible_for_user(song) %>">
+                  <%= link_to fa_icon("arrow-circle-o-up", class: "font-large"), vote_path(id: song.id ), params: { vote: '1'}, method: :post %>
+                  <%= link_to fa_icon("arrow-circle-o-down", class: "font-large"), vote_path(id: song.id ), params: { vote: '-1'} , method: :post%>
+                </div>
             </div>
           </div>
+          <div class="col-md-1 plxs prn">
+            <% if song.image_url %>
+              <%=image_tag(song.image_url)%>
+            <% else %>
+              <%= fa_stacked_icon("camera", base: "ban", class: "fa-2x gray") %>
+            <% end %>
+          </div>
+          <div class="col-md-8 prn">
+            <div class="font-large bold"><%= song.title %></div>
+            <div class="font-small"><%= song.artist %> : <%= song.album %></div>
+          </div>
         </div>
-        <div class="col-md-1 plxs prn">
-          <% if song.image_url %>
-            <%=image_tag(song.image_url)%>
-          <% else %>
-            <%= fa_stacked_icon("camera", base: "ban", class: "fa-2x gray") %>
-          <% end %>
-        </div>
-        <div class="col-md-8 prn">
-          <div class="font-large bold"><%= song.title %></div>
-          <div class="font-small"><%= song.artist %> : <%= song.album %></div>
-        </div>
-        <div class="col-md-2 ptm">
+        <div class="col-md-2 ptm pln">
+          <%= link_to(fa_icon("ban", class: "font-xl"), veto_path(id: song.id ), title: 'veto', method: :post, class: "#{disabled?(song)}") %>
           <%= link_to('Preview',search_path, class: "btn btn-black btn-sm right", disabled: song.preview_url.nil?)%>
+          <%= render partial: "shared/messages", locals: { song: song } %>
         </div>
       </div>
     <% end %>

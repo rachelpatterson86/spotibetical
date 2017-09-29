@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   post '/songs' => 'songs#submit'
   get '/songs' => 'songs#show'
   post '/songs/:id' => 'songs#vote', as: :vote
-  post '/songs/:id/veto' => 'songs#veto'
+  post '/songs/:id/veto' => 'songs#veto', as: :veto
   get '/playlists' => 'playlists#index', as: :playlists
   post '/playlists/:id' => 'playlists#send_to_spotify', as: :playlist
   get '/auth/spotify/callback', to: 'users#spotify'
